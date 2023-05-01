@@ -1,0 +1,49 @@
+{% extends 'crud/base.html' %}
+{% block form %}
+    <div class="container">
+        <div class=jumbotron>
+            <table class="table table-borderless">
+                <thead class="border-bottom font-weight-bold">
+                    <tr>
+                        <td>Full Name</td>
+                        <td>Phone</td>
+                        <td>Address</td>                        
+                        <td>
+                            <a href="{% url 'form' %}" class="btn btn-outline-success">
+                                <i class="fas fa-plus"> Add New </i>
+                            </a>
+                        </td>                       
+                    </tr>
+        
+                </thead>
+                <tbody>                    
+                    {% for user in users %}
+                    <tr>
+                        
+                        <td>{{user.FullName}}</td>
+                        <td>{{user.Phone}}</td>
+                        <td>{{user.Address}}</td>
+                        <td>
+                            
+                            <a href="{% url 'update' user.id %}" class="btn text-secondary px-3"> 
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                            <form action="{% url 'delete' user.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        
+            </table>
+            
+        </div>
+    </div>
+
+   
+
+{% endblock form %}
