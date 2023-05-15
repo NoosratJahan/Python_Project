@@ -30,7 +30,7 @@ def form(request):
         return redirect("/show")
     else:
         user = User()
-        return render(request, 'crud/form.html', {'user': user})) 
+        return render(request, 'crud/form.html', {'user': user})
     
 def update(request, id):
 
