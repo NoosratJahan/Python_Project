@@ -1,51 +1,43 @@
 {% extends 'crud/base.html' %}
 {% block form %}
-{% load static %}
+{% comment %} {% load static %} {% endcomment %}
     <div class="container">
         <div class="jumbotron" >            
 
-            <form method="post" action="" autocomplete="off">
-            {% csrf_token %}
+            <form method="post" action="{% url 'form' %}"  autocomplete="off">
+            {% csrf_token %}   
 
-                <div class="form-group">
-                  <!-- <div class="form-control"> -->
-                  <label >FullName</label>                  
-                 
-                  <input type="name" class="form-control" id="exampleInputEmail1"  placeholder="Your Name" value= {{form.FullName}} >
-                  <!-- {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %} -->
-                    
-                  <!-- </div> -->
+                <div class="form-group"> 
+                  <label >FullName</label>                 
+                  <input type="name" name="fullname"  class="form-control" placeholder="Your Name" value={{form.FullName}}>               
                 </div>
 
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
-                  <input type="email" class="form-control" placeholder="Enter email" value={{form.Email}}>
-                  
-                  <!-- {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %} -->
+                  <input type="email" name="email"   class="form-control" placeholder="Enter email" value={{form.Email}}>                 
                 </div>
 
+                 
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Phone</label>                  
+                  <input type="text" name="phone"   class="form-control"  placeholder=" "  value={{form.Phone}}>                  
+                </div>
                 
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Phone</label>
-                  
-                  <input type="text" class="form-control" id="exampleInputEmail1"  placeholder="" value={{form.Phone}}>
-                  <!-- {% comment %} <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> {% endcomment %} -->
+                  <label>Address</label>                  
+                  <input type="text" name="address" class="form-control"  placeholder=" " value={{form.Address}}>
                 </div>
-
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Address</label>
-                  
-                  <input type="text" class="form-control" id="exampleInputPassword1" placeholder="" value={{form.Address}}>
-                </div>
-
+               
                 <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                 </div>
+
                   <br>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit </button>
+            
             </form>
         </div>
     </div>
-{% endblock  %}
+{% endblock %}
