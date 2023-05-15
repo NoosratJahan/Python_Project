@@ -13,26 +13,47 @@ def home(request):
 
     return render(request, 'crud/base.html', dictionary)
 
-def form(request, id=0):
+def form(request):
+
     if request.method == "POST":
+        user = User()
+        name = request.POST.get('fullname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
 
-        if id==0:
-            form = UserForm(request.POST)
-        else:
-            user = User.objects.get(pk=id)
-            form = UserForm(request.POST, instance=user)
-
-        if form.is_valid():                     
-            form.save()
+        user.FullName = name
+        user.Email = email
+        user.Phone = phone
+        user.Address = address
+        user.save()
         return redirect("/show")
-           
     else:
-        if id == 0:
-            form = UserForm()
-        else:
-            user = User.objects.get(pk=id)
-            form = UserForm(instance=user)
-        return render(request, 'crud/form.html', {'form': form}) 
+        user = User()
+        return render(request, 'crud/form.html', {'user': user})) 
+    
+def update(request, id):
+
+    if request.method == "POST":
+        user = User()
+        name = request.POST.get('fullname')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
+
+        user.FullName = name
+        user.Email = email
+        user.Phone = phone
+        user.Address = address
+
+        user = User.objects.get(id=id)
+        user=UserForm(request.POST,instance=user)
+        user.save()
+        user = User.objects.all()
+        return redirect("/show")
+    else:
+        user = User()
+        return render(request, 'crud/form.html', {'user': user})
             
 
 def show(request):
