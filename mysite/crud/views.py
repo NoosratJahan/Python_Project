@@ -14,46 +14,30 @@ def home(request):
     return render(request, 'crud/base.html', dictionary)
 
 def form(request):
+    user = User.objects.all()
+    form = UserForm()
+    context = {'user': user, 'form': form}
 
     if request.method == "POST":
-        user = User()
-        name = request.POST.get('fullname')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-
-        user.FullName = name
-        user.Email = email
-        user.Phone = phone
-        user.Address = address
-        user.save()
-        return redirect("/show")
-    else:
-        user = User()
-        return render(request, 'crud/form.html', {'user': user})
+        user = User.objects.all()
+        form = UserForm(request.POST)
+        if form.is_valid():
+             form.save()
+             return redirect("/show")  
+       
+    return render(request, 'crud/form.html', context)
     
 def update(request, id):
+    user = User.objects.get(id=id)
+    form=UserForm(instance=user)
 
-    if request.method == "POST":
-        user = User()
-        name = request.POST.get('fullname')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-
-        user.FullName = name
-        user.Email = email
-        user.Phone = phone
-        user.Address = address
-
-        user = User.objects.get(id=id)
-        user=UserForm(request.POST,instance=user)
-        user.save()
-        user = User.objects.all()
-        return redirect("/show")
-    else:
-        user = User()
-        return render(request, 'crud/form.html', {'user': user})
+    if request.method == 'POST':
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("/show")
+        
+    return render(request, 'crud/form.html', {'form': form})
             
 
 def show(request):
@@ -64,4 +48,5 @@ def delete(request, id):
     user = User.objects.get(pk=id)
     user.delete()
     return redirect("/show")
+
 
