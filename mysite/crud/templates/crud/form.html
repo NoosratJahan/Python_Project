@@ -8,33 +8,39 @@
             {% csrf_token %}   
 
                 <div class="form-group"> 
-                  <label >FullName</label>                 
-                  <input type="name" name="fullname"  class="form-control" placeholder="Your Name" value={{form.FullName}}>               
+                  <label >FullName</label> 
+                  {{form.FullName}}              
+                  {% comment %} <input type="name" name="fullname"  class="form-control" placeholder="Your Name" >                {% endcomment %}
                 </div>
 
 
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email</label>
-                  <input type="email" name="email"   class="form-control" placeholder="Enter email" value={{form.Email}}>                 
+                  {{form.Email}} 
+                  {% comment %} <input type="email" name="email"   class="form-control" placeholder="Enter email" >                  {% endcomment %}
                 </div>
 
                  
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Phone</label>                  
-                  <input type="text" name="phone"   class="form-control"  placeholder=" "  value={{form.Phone}}>                  
+                  <label for="exampleInputEmail1">Phone</label>  
+                  {{form.Phone}}                 
+                  {% comment %} <input type="text" name="phone"   class="form-control"  placeholder=" " >                   {% endcomment %}
                 </div>
                 
-                <div class="form-group">
-                  <label>Address</label>                  
-                  <input type="text" name="address" class="form-control"  placeholder=" " value={{form.Address}}>
-                </div>
-               
-                <div class="form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                </div>
 
+                <div class="form-group">
+                  <label>Address</label> 
+                  {{form.Address}}               
+                  {% comment %} <input type="text" name="address" class="form-control"  placeholder=" " > {% endcomment %}
+                </div>
+                <br>
+
+                <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="exampleCheck1" style="padding: 0; width: 20px;">
+                  <label class="form-check-label" for="exampleCheck1">Remember Me</label>                  
+                </div>
                   <br>
+                  
                 <button type="submit" class="btn btn-primary">Submit </button>
             
             </form>
